@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NAIB ACADEMY — Next-Gen Training Institute</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23070708'/%3E%3Ctext x='32' y='42' font-family='Georgia,serif' font-size='30' font-weight='700' fill='%23C9A961' text-anchor='middle'%3ENA%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+/* ===== TOKENS ===== */
+:root{
+  --bg:#070708;
+  --bg-2:#0B0B0D;
+  --bg-3:#101013;
+  --line:rgba(201,169,97,.16);
+  --line-2:rgba(201,169,97,.30);
+  --gold:#C9A961;
+  --gold-2:#E3C77F;
+  --gold-3:#9A7B3F;
+  --cream:#F4EEDD;
+  --text:#EFE9DA;
+  --muted:rgba(239,233,218,.62);
+  --muted-2:rgba(239,233,218,.45);
+  --radius:18px;
+  --font-display:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --font-body:"Manrope",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+::selection{background:rgba(201,169,97,.30);color:#fff}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+.wrap{max-width:1200px;margin:0 auto;padding:0 28px}
+section{position:relative}
+
+/* grain overlay */
+body::after{
+  content:"";position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+}
+
+/* ===== TYPOGRAPHY ===== */
+h1,h2,h3,.display{font-family:var(--font-display);font-weight:600;line-height:1.12;letter-spacing:.01em}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:12px;letter-spacing:.34em;text-transform:uppercase;
+  color:var(--gold-2);font-weight:600;
+}
+.eyebrow::before{content:"";width:34px;height:1px;background:var(--gold);opacity:.6}
+.section-head{max-width:760px;margin:0 auto 56px;text-align:center}
+.section-head h2{font-size:clamp(30px,4.2vw,46px);color:var(--cream);margin:18px 0 14px}
+.section-head p{color:var(--muted);font-size:17px}
+
+/* ===== NAV ===== */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  transition:background .35s var(--ease),box-shadow .35s var(--ease),padding .35s var(--ease);
+  padding:20px 0;
+}
+.nav.scrolled{
+  background:rgba(7,7,8,.82);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  box-shadow:0 1px 0 var(--line);
+  padding:12px 0;
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-mark{
+  width:40px;height:40px;border-radius:11px;
+  background:linear-gradient(135deg,rgba(201,169,97,.22),rgba(201,169,97,.05));
+  border:1px solid var(--line-2);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-size:19px;font-weight:700;color:var(--gold-2);
+}
+.brand-name{font-family:var(--font-display);font-size:21px;letter-spacing:.10em;color:var(--cream)}
+.brand-name small{display:block;font-family:var(--font-body);font-size:9px;letter-spacing:.42em;color:var(--gold);text-transform:uppercase;margin-top:2px}
+.nav-links{display:flex;align-items:center;gap:30px}
+.nav-links a{font-size:13.5px;color:var(--muted);letter-spacing:.02em;transition:color .25s;position:relative}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-5px;width:0;height:1px;background:var(--gold);transition:width .3s var(--ease)}
+.nav-links a:hover{color:var(--cream)}
+.nav-links a:hover::after{width:100%}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  padding:13px 26px;border-radius:100px;
+  font-size:14px;font-weight:600;letter-spacing:.03em;
+  transition:all .3s var(--ease);white-space:nowrap;
+}
+.btn-gold{
+  background:linear-gradient(135deg,var(--gold-2),var(--gold) 55%,var(--gold-3));
+  color:#0A0A0B;box-shadow:0 6px 24px rgba(201,169,97,.22);
+}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 10px 34px rgba(201,169,97,.34)}
+.btn-ghost{border:1px solid var(--line-2);color:var(--cream)}
+.btn-ghost:hover{border-color:var(--gold);background:rgba(201,169,97,.07)}
+.btn-sm{padding:10px 20px;font-size:13px}
+
+/* ===== HERO ===== */
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  padding:140px 0 90px;position:relative;overflow:hidden;
+}
+.hero-bg{position:absolute;inset:0;z-index:-2}
+.hero-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.55) saturate(.85)}
+.hero-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(201,169,97,.10),transparent 55%),linear-gradient(180deg,rgba(7,7,8,.62) 0%,rgba(7,7,8,.88) 60%,var(--bg) 100%)}
+.hero-grid{
+  display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center;
+}
+.hero h1{
+  font-size:clamp(46px,7vw,84px);color:var(--cream);margin:22px 0 20px;
+  text-wrap:balance;
+}
+.hero h1 em{
+  font-style:italic;color:var(--gold-2);
+  background:linear-gradient(120deg,var(--gold-2),var(--gold-3));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero-sub{color:var(--muted);font-size:18px;max-width:540px;margin-bottom:34px}
+.hero-cta{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:44px}
+.hero-proof{display:flex;align-items:center;gap:26px;flex-wrap:wrap}
+.rating{display:flex;align-items:center;gap:12px}
+.rating-stars{display:flex;align-items:center;gap:3px;margin-bottom:4px}
+.rating b{font-size:22px;font-family:var(--font-display);color:var(--cream)}
+.rating span{color:var(--muted-2);font-size:12.5px;display:block;line-height:1.3}
+.platforms{display:flex;gap:14px;align-items:center}
+.platforms span{
+  font-size:10.5px;letter-spacing:.08em;color:var(--muted-2);
+  padding:6px 12px;border:1px solid var(--line);border-radius:100px;text-transform:uppercase;
+}
+/* hero visual */
+.hero-visual{position:relative}
+.hero-card{
+  background:rgba(11,11,13,.66);border:1px solid var(--line);
+  border-radius:var(--radius);padding:30px;backdrop-filter:blur(10px);
+  box-shadow:0 30px 80px rgba(0,0,0,.5);
+}
+.hero-card-tag{display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-2);margin-bottom:18px}
+.pulse{width:7px;height:7px;border-radius:50%;background:var(--gold-2);position:relative}
+.pulse::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:1px solid var(--gold-2);animation:pulse 2s ease-out infinite}
+@keyframes pulse{0%{transform:scale(.5);opacity:1}100%{transform:scale(1.6);opacity:0}}
+.hero-card h3{font-size:26px;color:var(--cream);margin-bottom:6px}
+.hero-card p{color:var(--muted);font-size:14px;margin-bottom:20px}
+.chip-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.chip{
+  font-size:12px;padding:6px 14px;border-radius:100px;
+  border:1px solid var(--line-2);color:var(--gold-2);background:rgba(201,169,97,.06);
+}
+.hero-card .mini{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--muted)}
+.hero-card .mini svg{color:var(--gold-2)}
+.hero-float{
+  position:absolute;top:-26px;right:-14px;
+  background:linear-gradient(135deg,var(--gold-2),var(--gold-3));
+  color:#0A0A0B;font-weight:700;font-size:13px;
+  padding:10px 18px;border-radius:100px;box-shadow:0 12px 30px rgba(201,169,97,.4);
+  display:flex;align-items:center;gap:8px;
+}
+.hero-float-2{
+  position:absolute;bottom:-20px;left:-10px;
+  background:rgba(11,11,13,.9);border:1px solid var(--line-2);
+  padding:12px 18px;border-radius:14px;display:flex;align-items:center;gap:12px;
+  box-shadow:0 16px 40px rgba(0,0,0,.5);
+}
+.hero-float-2 b{font-family:var(--font-display);font-size:20px;color:var(--gold-2)}
+.hero-float-2 span{font-size:12px;color:var(--muted)}
+
+/* ===== MARQUEE / TICKER ===== */
+.ticker{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:18px 0;overflow:hidden;background:var(--bg-2)}
+.ticker-track{display:flex;gap:56px;white-space:nowrap;animation:ticker 36s linear infinite;width:max-content}
+.ticker-track span{font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted-2)}
+.ticker-track span b{color:var(--gold-2);font-weight:600}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ===== WHY ===== */
+.why{padding:110px 0}
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.why-card{
+  background:linear-gradient(180deg,rgba(16,16,19,.9),rgba(11,11,13,.9));
+  border:1px solid var(--line);border-radius:var(--radius);
+  padding:30px 26px;transition:transform .35s var(--ease),border-color .35s;
+}
+.why-card:hover{transform:translateY(-5px);border-color:var(--line-2)}
+.why-num{font-family:var(--font-display);font-size:44px;color:var(--gold-2);line-height:1;margin-bottom:16px}
+.why-card h3{font-size:20px;color:var(--cream);margin-bottom:10px}
+.why-card p{font-size:14px;color:var(--muted)}
+.why-icon{margin-bottom:20px}
+
+/* ===== COURSES ===== */
+.courses{padding:110px 0;background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%);position:relative}
+.courses::before{
+  content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:100%;max-width:1400px;height:1px;
+  background:linear-gradient(90deg,transparent,var(--line-2),transparent);
+}
+.course-tabs{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:52px}
+.course-tab{
+  padding:12px 22px;border-radius:100px;border:1px solid var(--line);
+  font-size:14px;color:var(--muted);transition:all .3s var(--ease);
+}
+.course-tab:hover{border-color:var(--line-2);color:var(--cream)}
+.course-tab.active{
+  background:linear-gradient(135deg,var(--gold-2),var(--gold-3));color:#0A0A0B;
+  border-color:transparent;font-weight:700;
+}
+.course-panel{display:none}
+.course-panel.active{display:block;animation:panelIn .5s var(--ease)}
+@keyframes panelIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.course-body{
+  background:linear-gradient(180deg,rgba(16,16,19,.95),rgba(11,11,13,.95));
+  border:1px solid var(--line);border-radius:22px;overflow:hidden;
+  display:grid;grid-template-columns:1fr 1.3fr;
+}
+.course-intro{padding:44px 40px;border-right:1px solid var(--line);display:flex;flex-direction:column;justify-content:center}
+.course-no{font-size:12px;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;margin-bottom:14px}
+.course-intro h3{font-size:clamp(26px,3vw,34px);color:var(--cream);margin-bottom:16px}
+.course-intro p{color:var(--muted);font-size:14.5px;margin-bottom:24px}
+.course-skills{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:26px}
+.course-cta{display:flex;gap:12px;flex-wrap:wrap}
+.phases{padding:40px}
+.phase-list{display:flex;flex-direction:column;gap:0}
+.phase{
+  display:grid;grid-template-columns:64px 1fr 40px;gap:18px;align-items:start;
+  padding:22px 4px;border-bottom:1px solid var(--line);position:relative;
+}
+.phase:last-child{border-bottom:none}
+.phase-idx{font-family:var(--font-display);font-size:34px;color:var(--gold-3);line-height:1}
+.phase h4{font-size:17px;color:var(--cream);margin-bottom:6px;font-family:var(--font-display);font-weight:600}
+.phase p{font-size:13.5px;color:var(--muted)}
+.phase-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.phase-tags span{font-size:11px;color:var(--gold-2);background:rgba(201,169,97,.07);border:1px solid var(--line);padding:3px 10px;border-radius:100px}
+.phase-week{font-size:11px;letter-spacing:.14em;color:var(--muted-2);text-transform:uppercase;text-align:right;padding-top:6px;white-space:nowrap}
+
+/* ===== AI RECOMMENDER ===== */
+.recommender{padding:110px 0;background:var(--bg-2);position:relative;overflow:hidden}
+.recommender::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at 80% 30%,rgba(201,169,97,.08),transparent 55%);
+}
+.quiz-box{
+  max-width:860px;margin:0 auto;position:relative;
+  background:linear-gradient(180deg,rgba(16,16,19,.95),rgba(11,11,13,.98));
+  border:1px solid var(--line);border-radius:24px;padding:48px;
+}
+.quiz-progress{display:flex;gap:8px;margin-bottom:34px}
+.quiz-dot{height:3px;border-radius:3px;flex:1;background:rgba(255,255,255,.08);transition:background .3s}
+.quiz-dot.on{background:var(--gold)}
+.quiz h3{font-size:clamp(24px,3vw,32px);color:var(--cream);margin-bottom:8px}
+.quiz .q-sub{color:var(--muted);font-size:14px;margin-bottom:30px}
+.quiz-options{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.quiz-opt{
+  text-align:left;padding:20px 22px;border-radius:14px;border:1px solid var(--line);
+  background:rgba(255,255,255,.02);color:var(--text);font-size:14.5px;
+  transition:all .3s var(--ease);
+}
+.quiz-opt:hover{border-color:var(--line-2);background:rgba(201,169,97,.06)}
+.quiz-opt b{display:block;font-size:15.5px;color:var(--cream);margin-bottom:4px;font-family:var(--font-display)}
+.quiz-opt small{color:var(--muted-2);font-size:12.5px}
+.quiz-actions{display:flex;gap:12px;margin-top:28px;align-items:center}
+.quiz-back{color:var(--muted);font-size:13px}
+.quiz-back:hover{color:var(--cream)}
+.quiz-result{
+  text-align:center;padding:20px 0 0;display:none;
+}
+.quiz-result.show{display:block;animation:panelIn .5s var(--ease)}
+.quiz-result .result-mark{width:84px;height:84px;margin:0 auto 24px;border-radius:50%;background:linear-gradient(135deg,rgba(201,169,97,.25),rgba(201,169,97,.05));border:1px solid var(--line-2);display:flex;align-items:center;justify-content:center}
+.quiz-result h3{font-size:30px}
+.quiz-result p{color:var(--muted);max-width:520px;margin:12px auto 28px}
+
+/* ===== CAMPUS ===== */
+.campus{padding:110px 0}
+.campus-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.campus-media{position:relative}
+.campus-media img{border-radius:22px;border:1px solid var(--line);box-shadow:0 40px 100px rgba(0,0,0,.55)}
+.campus-media::before{
+  content:"";position:absolute;inset:-14px auto auto -14px;width:120px;height:120px;
+  border:1px solid var(--line-2);border-radius:22px;z-index:-1;
+}
+.campus-list{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:28px 0 32px}
+.campus-item{display:flex;align-items:center;gap:12px;font-size:14px;color:var(--muted)}
+.campus-item svg{color:var(--gold-2);flex:none}
+.campus-note{font-size:12.5px;color:var(--muted-2);margin-top:16px}
+
+/* ===== AI ASSISTANT SECTION ===== */
+.naib-ai{padding:110px 0;background:var(--bg-2);position:relative;overflow:hidden}
+.naib-ai::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at 20% 40%,rgba(201,169,97,.07),transparent 55%);
+}
+.ai-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center}
+.ai-media{position:relative}
+.ai-media img{border-radius:22px;border:1px solid var(--line);box-shadow:0 40px 100px rgba(0,0,0,.55)}
+.ai-media .live-tag{
+  position:absolute;top:18px;left:18px;display:flex;align-items:center;gap:8px;
+  background:rgba(7,7,8,.85);border:1px solid var(--line-2);padding:8px 16px;border-radius:100px;
+  font-size:12px;letter-spacing:.2em;color:var(--gold-2);text-transform:uppercase;
+}
+.ai-feats{display:flex;flex-direction:column;gap:16px;margin:30px 0}
+.ai-feat{display:flex;gap:16px;align-items:flex-start}
+.ai-feat .ic{flex:none;width:44px;height:44px;border-radius:12px;border:1px solid var(--line-2);background:rgba(201,169,97,.07);display:flex;align-items:center;justify-content:center;color:var(--gold-2)}
+.ai-feat b{color:var(--cream);font-size:15.5px;display:block;margin-bottom:3px}
+.ai-feat span{color:var(--muted);font-size:13.5px}
+
+/* ===== TRUSTED INSTITUTES ===== */
+.trusted{padding:90px 0;border-bottom:1px solid var(--line)}
+.trusted-inner{max-width:1100px;margin:0 auto;text-align:center}
+.trusted-logos{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin-top:40px}
+.trusted-logos span{
+  font-family:var(--font-display);font-size:20px;letter-spacing:.06em;color:var(--muted-2);
+  padding:10px 22px;border:1px solid var(--line);border-radius:14px;
+}
+.trusted-logos span b{color:var(--gold-2);font-weight:600}
+
+/* ===== WALL OF FAME ===== */
+.fame{padding:110px 0}
+.fame-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.fame-card{
+  background:linear-gradient(180deg,rgba(16,16,19,.92),rgba(11,11,13,.92));
+  border:1px solid var(--line);border-radius:var(--radius);padding:32px 28px;
+  display:flex;flex-direction:column;gap:18px;transition:transform .35s var(--ease),border-color .35s;
+}
+.fame-card:hover{transform:translateY(-4px);border-color:var(--line-2)}
+.fame-quote{color:var(--muted);font-size:14.5px;font-style:italic}
+.fame-quote::before{content:"“";font-family:var(--font-display);font-size:44px;color:var(--gold-3);line-height:.5;display:block;margin-bottom:8px}
+.fame-person{display:flex;align-items:center;gap:14px}
+.fame-avatar{
+  width:48px;height:48px;border-radius:50%;flex:none;
+  background:linear-gradient(135deg,rgba(201,169,97,.3),rgba(201,169,97,.08));
+  border:1px solid var(--line-2);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-size:18px;color:var(--gold-2);
+}
+.fame-person b{color:var(--cream);font-size:15px;display:block;line-height:1.3}
+.fame-person span{color:var(--gold-2);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+
+/* ===== HR QUOTES ===== */
+.hr{padding:90px 0;background:var(--bg-2)}
+.hr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.hr-card{
+  background:rgba(16,16,19,.6);border:1px solid var(--line);border-radius:var(--radius);
+  padding:30px 26px;display:flex;flex-direction:column;gap:16px;
+}
+.hr-card p{color:var(--muted);font-size:14px;font-style:italic}
+.hr-card .who{display:flex;align-items:center;gap:12px}
+.hr-card .who .dot{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--gold-3),var(--gold));display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#0A0A0B;flex:none}
+.hr-card .who b{color:var(--cream);font-size:14px;display:block}
+.hr-card .who span{color:var(--muted-2);font-size:12px}
+
+/* ===== APPLY STEPS ===== */
+.apply{padding:110px 0;position:relative;overflow:hidden}
+.apply::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(201,169,97,.09),transparent 60%)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;position:relative;max-width:1000px;margin:0 auto}
+.step{
+  text-align:center;padding:40px 24px;
+  background:rgba(11,11,13,.7);border:1px solid var(--line);border-radius:20px;position:relative;
+}
+.step-num{
+  width:56px;height:56px;margin:0 auto 22px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold-2),var(--gold-3));color:#0A0A0B;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-size:24px;font-weight:700;
+}
+.step h3{color:var(--cream);font-size:20px;margin-bottom:10px}
+.step p{color:var(--muted);font-size:14px}
+.apply-cta{text-align:center;margin-top:48px}
+
+/* ===== CAREER SYSTEM ===== */
+.career{padding:110px 0;background:var(--bg-2);position:relative;overflow:hidden}
+.career::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 15% 70%,rgba(201,169,97,.06),transparent 55%)}
+.timeline{max-width:920px;margin:0 auto;display:grid;grid-template-columns:110px 1fr;gap:0}
+.tl-item{display:contents}
+.tl-item .tl-time{
+  text-align:right;padding:26px 22px 26px 0;
+  font-family:var(--font-display);font-size:20px;color:var(--gold-2);
+}
+.tl-item .tl-body{
+  padding:26px 0 26px 30px;border-left:1px solid var(--line-2);position:relative;
+}
+.tl-item .tl-body::before{
+  content:"";position:absolute;left:-5px;top:34px;width:9px;height:9px;border-radius:50%;
+  background:var(--gold-2);box-shadow:0 0 0 5px rgba(201,169,97,.15);
+}
+.tl-item .tl-body h3{color:var(--cream);font-size:19px;margin-bottom:6px}
+.tl-item .tl-body p{color:var(--muted);font-size:14px}
+.career-note{text-align:center;margin-top:50px;color:var(--muted);font-size:15px}
+.career-note b{color:var(--gold-2)}
+
+/* ===== FAQ ===== */
+.faq{padding:110px 0}
+.faq-list{max-width:820px;margin:0 auto}
+.faq-item{border:1px solid var(--line);border-radius:16px;margin-bottom:14px;overflow:hidden;background:rgba(11,11,13,.6)}
+.faq-q{
+  width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;
+  padding:22px 26px;text-align:left;font-size:16px;color:var(--cream);font-weight:600;
+  transition:background .3s;
+}
+.faq-q:hover{background:rgba(201,169,97,.04)}
+.faq-q svg{flex:none;transition:transform .35s var(--ease);color:var(--gold-2)}
+.faq-item.open .faq-q svg{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .45s var(--ease)}
+.faq-a p{padding:0 26px 24px;color:var(--muted);font-size:14.5px}
+.faq-extra{text-align:center;margin-top:36px;color:var(--muted);font-size:14px}
+.faq-extra a{color:var(--gold-2);font-weight:600}
+
+/* ===== FOOTER ===== */
+footer{border-top:1px solid var(--line);background:var(--bg-2);padding:70px 0 34px}
+.foot-grid{display:grid;grid-template-columns:1.2fr .8fr .8fr 1fr;gap:40px;margin-bottom:54px}
+.foot-brand p{color:var(--muted);font-size:14px;margin-top:16px;max-width:300px}
+.foot-col h4{font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-2);margin-bottom:20px}
+.foot-col a,.foot-col li{display:block;color:var(--muted);font-size:14px;margin-bottom:12px;list-style:none;transition:color .25s}
+.foot-col a:hover{color:var(--cream)}
+.foot-contact li{display:flex;align-items:center;gap:10px}
+.foot-contact svg{color:var(--gold-2);flex:none}
+.foot-sign{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;
+  border-top:1px solid var(--line);padding-top:34px;
+}
+.autograph{line-height:0}
+.autograph svg{width:220px;height:70px}
+.foot-copy{color:var(--muted-2);font-size:12.5px}
+.foot-copy b{color:var(--gold-2);font-weight:600}
+.admin-line{display:flex;align-items:center;gap:14px;margin-top:14px}
+.admin-avatar{
+  width:44px;height:44px;border-radius:50%;border:1px solid var(--line-2);
+  background:linear-gradient(135deg,rgba(201,169,97,.25),rgba(201,169,97,.05));
+  display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--gold-2);flex:none;
+}
+.admin-line b{color:var(--cream);font-size:14px;display:block}
+.admin-line span{color:var(--muted-2);font-size:12px}
+
+/* ===== AI CHAT WIDGET ===== */
+.chat-launcher{
+  position:fixed;bottom:26px;right:26px;z-index:1200;
+  width:62px;height:62px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold-2),var(--gold-3));
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 14px 40px rgba(201,169,97,.4);
+  transition:transform .3s var(--ease);
+}
+.chat-launcher:hover{transform:scale(1.06)}
+.chat-window{
+  position:fixed;bottom:100px;right:26px;z-index:1201;
+  width:380px;max-width:calc(100vw - 52px);height:540px;max-height:calc(100vh - 130px);
+  background:linear-gradient(180deg,rgba(16,16,19,.98),rgba(11,11,13,.99));
+  border:1px solid var(--line-2);border-radius:20px;
+  display:flex;flex-direction:column;overflow:hidden;
+  box-shadow:0 30px 90px rgba(0,0,0,.6);
+  transform:translateY(16px);opacity:0;pointer-events:none;
+  transition:transform .35s var(--ease),opacity .3s;
+}
+.chat-window.open{transform:none;opacity:1;pointer-events:auto}
+.chat-head{
+  padding:18px 20px;border-bottom:1px solid var(--line);
+  display:flex;align-items:center;gap:12px;
+}
+.chat-head .avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--gold-2),var(--gold-3));display:flex;align-items:center;justify-content:center;color:#0A0A0B;font-weight:700;font-size:15px}
+.chat-head b{color:var(--cream);font-size:15px;display:block}
+.chat-head span{color:var(--muted-2);font-size:12px}
+.chat-close{margin-left:auto;color:var(--muted);padding:6px}
+.chat-close:hover{color:var(--cream)}
+.chat-body{flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:12px}
+.chat-body::-webkit-scrollbar{width:5px}
+.chat-body::-webkit-scrollbar-thumb{background:var(--line-2);border-radius:3px}
+.msg{max-width:82%;padding:12px 16px;border-radius:16px;font-size:13.5px;line-height:1.55;animation:panelIn .3s var(--ease)}
+.msg.bot{background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--text);align-self:flex-start;border-bottom-left-radius:4px}
+.msg.user{background:linear-gradient(135deg,var(--gold-2),var(--gold-3));color:#0A0A0B;align-self:flex-end;border-bottom-right-radius:4px;font-weight:600}
+.chat-quick{display:flex;flex-wrap:wrap;gap:8px;padding:0 20px 14px}
+.chat-quick button{font-size:12px;color:var(--gold-2);border:1px solid var(--line-2);padding:7px 14px;border-radius:100px;transition:all .25s}
+.chat-quick button:hover{background:rgba(201,169,97,.1)}
+.chat-input{display:flex;gap:10px;padding:14px 20px;border-top:1px solid var(--line);background:rgba(7,7,8,.5)}
+.chat-input input{
+  flex:1;background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:100px;
+  padding:11px 18px;color:var(--text);font-size:13.5px;outline:none;font-family:inherit;
+}
+.chat-input input:focus{border-color:var(--line-2)}
+.chat-input button{
+  width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--gold-2),var(--gold-3));
+  display:flex;align-items:center;justify-content:center;color:#0A0A0B;flex:none;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width:1024px){
+  .hero-grid,.campus-grid,.ai-grid{grid-template-columns:1fr;gap:40px}
+  .why-grid{grid-template-columns:1fr 1fr}
+  .course-body{grid-template-columns:1fr}
+  .course-intro{border-right:none;border-bottom:1px solid var(--line)}
+  .fame-grid,.hr-grid{grid-template-columns:1fr 1fr}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width:760px){
+  .wrap{padding:0 20px}
+  .nav-links{display:none}
+  .why-grid{grid-template-columns:1fr}
+  .fame-grid,.hr-grid,.steps{grid-template-columns:1fr}
+  .quiz-options{grid-template-columns:1fr}
+  .campus-list{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr}
+  .hero{padding-top:120px}
+  .timeline{grid-template-columns:70px 1fr}
+  .chat-window{right:14px;bottom:92px;width:calc(100vw - 28px)}
+  .chat-launcher{right:18px;bottom:20px}
+  .hero-float{top:-16px;right:4px}
+  .hero-float-2{left:4px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand">
+      <span class="brand-mark">NA</span>
+      <span class="brand-name">NAIB ACADEMY<small>Next-Gen Institute</small></span>
+    </a>
+    <div class="nav-links">
+      <a href="#why">Why Us</a>
+      <a href="#courses">Courses</a>
+      <a href="#campus">Campus</a>
+      <a href="#fame">Placements</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="#apply" class="btn btn-gold btn-sm">Free Consultation</a>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="hero" id="top">
+  <div class="hero-bg"><img src="hero-academy.jpg" alt="Naib Academy campus at night"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Next-Gen Training Institute</span>
+      <h1>Master Technology.<br>Build a <em>Luxury Career.</em></h1>
+      <p class="hero-sub">Naib Academy is the premium training and placement institute for students who want high-paying tech careers. AI, Full Stack, Cloud, Design and Marketing — taught with the most advanced curriculum, backed by a proven placement record.</p>
+      <div class="hero-cta">
+        <a href="#courses" class="btn btn-gold">Explore Courses</a>
+        <a href="#apply" class="btn btn-ghost">Book Free Demo Class</a>
+      </div>
+      <div class="hero-proof">
+        <div class="rating">
+          <div>
+            <div class="rating-stars"><svg width="15" height="15" viewBox="0 0 24 24" fill="#C9A961"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg><svg width="15" height="15" viewBox="0 0 24 24" fill="#C9A961"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg><svg width="15" height="15" viewBox="0 0 24 24" fill="#C9A961"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg><svg width="15" height="15" viewBox="0 0 24 24" fill="#C9A961"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg><svg width="15" height="15" viewBox="0 0 24 24" fill="#C9A961"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8z"/></svg></div>
+            <b>5.0</b> <span>student rating</span>
+          </div>
+        </div>
+        <div class="platforms">
+          <span>Google</span><span>Trustpilot</span><span>Glassdoor</span><span>Facebook</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-float">AI-Powered Learning</div>
+      <div class="hero-card">
+        <div class="hero-card-tag"><span class="pulse"></span> Naib AI Assistant</div>
+        <h3>Your personal career advisor</h3>
+        <p>Answers course questions, builds your study plan and recommends the perfect program in seconds.</p>
+        <div class="chip-row">
+          <span class="chip">Course Matching</span>
+          <span class="chip">Study Plans</span>
+          <span class="chip">Career Guidance</span>
+        </div>
+        <div class="mini">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          Available 24/7 · Bengali · English · Chinese
+        </div>
+      </div>
+      <div class="hero-float-2"><b>100%</b><span>placement<br>assistance</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- ===== TICKER ===== -->
+<div class="ticker">
+  <div class="ticker-track" id="tickerTrack">
+    <span><b>AI & ML</b> · Full Stack · Cloud Computing · Graphic Design · UI/UX · Digital Marketing ·</span>
+    <span><b>AI & ML</b> · Full Stack · Cloud Computing · Graphic Design · UI/UX · Digital Marketing ·</span>
+  </div>
+</div>
+
+<!-- ===== WHY US ===== -->
+<section class="why" id="why">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Why Naib Academy</span>
+      <h2>From Training to Placement —<br>India's Most Trusted Ed-Tech Experience</h2>
+      <p>Premium training, real projects, and direct company connections — built around one goal: getting you hired.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#C9A961" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M5 20a7 7 0 0 1 14 0"/><path d="M12 12v4"/></svg>
+        </div>
+        <div class="why-num">100%</div>
+        <h3>Placement Assistance</h3>
+        <p>Resume building, mock interviews and real company connections to get you job-ready.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#C9A961" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <div class="why-num">50+</div>
+        <h3>Expert Mentors</h3>
+        <p>Certified professionals with real-world backgrounds who keep you ahead of industry trends.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#C9A961" stroke-width="1.6"><path d="M4 19V5a2 2 0 0 1 2-2h13v18H6a2 2 0 0 1-2-2z"/><path d="M8 8h8M8 12h5"/></svg>
+        </div>
+        <div class="why-num">1-on-1</div>
+        <h3>Personal Mentorship</h3>
+        <p>Tailored mentoring sessions and complimentary exam prep every week, at your own pace.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#C9A961" stroke-width="1.6"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg>
+        </div>
+        <div class="why-num">2026</div>
+        <h3>Industry-Aligned Curriculum</h3>
+        <p>Updated with the latest tech so you earn industry-relevant skills in a competitive world.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COURSES ===== -->
+<section class="courses" id="courses">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Advanced Programs</span>
+      <h2>Build Your Tech Career with Premium Courses</h2>
+      <p>Six next-gen programs with hands-on projects, expert mentors and a proven placement rate.</p>
+    </div>
+    <div class="course-tabs" id="courseTabs">
+      <button class="course-tab active" data-course="ai">AI & Machine Learning</button>
+      <button class="course-tab" data-course="fs">Full Stack Development</button>
+      <button class="course-tab" data-course="cloud">Cloud Computing</button>
+      <button class="course-tab" data-course="gd">Graphic Design</button>
+      <button class="course-tab" data-course="ux">UI/UX Design</button>
+      <button class="course-tab" data-course="dm">Digital Marketing</button>
+    </div>
+
+    <!-- course panels -->
+    <div class="course-panel active" data-panel="ai">
+      <div class="course-body">
+        <div class="course-intro">
+          <div class="course-no">01 — Advanced Tech Skills</div>
+          <h3>Artificial Intelligence & Machine Learning</h3>
+          <p>Naib Academy's flagship AI program. Learn Python, data science, machine learning and robotics — and start building intelligent systems that top tech companies hire for.</p>
+          <div class="course-skills"><span class="chip">Python</span><span class="chip">Pandas</span><span class="chip">NumPy</span><span class="chip">TensorFlow</span><span class="chip">OpenCV</span><span class="chip">Scikit-learn</span></div>
+          <div class="course-cta">
+            <a href="#apply" class="btn btn-gold btn-sm">Download Curriculum</a>
+            <a href="#apply" class="btn btn-ghost btn-sm">Book Demo</a>
+          </div>
+        </div>
+        <div class="phases">
+          <div class="phase-list">
+            <div class="phase"><div class="phase-idx">01</div><div><h4>AI Foundations</h4><p>Python, core AI concepts and logic building with real-world examples.</p><div class="phase-tags"><span>Python 3</span><span>NumPy</span><span>Logic Building</span><span>OOP</span></div></div><div class="phase-week">3 Weeks</div></div>
+            <div class="phase"><div class="phase-idx">02</div><div><h4>Data Science</h4><p>Data cleaning, analysis and feature prep using Pandas workflows.</p><div class="phase-tags"><span>Pandas</span><span>Matplotlib</span><span>Seaborn</span><span>EDA</span></div></div><div class="phase-week">3 Weeks</div></div>
+            <div class="phase"><div class="phase-idx">03</div><div><h4>Machine Learning</h4><p>Build, train and evaluate models for real-world ML use cases.</p><div class="phase-tags"><span>Scikit-Learn</span><span>TensorFlow</span><span>Regression</span><span>Neural Nets</span></div></div><div class="phase-week">3 Weeks</div></div>
+            <div class="phase"><div class="phase-idx">04</div><div><h4>Robotics with Arduino</h4><p>Apply AI to the physical world with sensors and automation.</p><div class="phase-tags"><span>Arduino</span><span>Sensors</span><span>Automation</span><span>IoT Basics</span></div></div><div class="phase-week">3 Weeks</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-panel" data-panel="fs">
+      <div class="course-body">
+        <div class="course-intro">
+          <div class="course-no">02 — Advanced Tech Skills</div>
+          <h3>Full Stack Development</h3>
+          <p>The most hired professionals in tech today. Master frontend and backend from your first line of code to your first job offer, guided by certified instructors.</p>
+          <div class="course-skills"><span class="chip">HTML5</span><span class="chip">CSS3</span><span class="chip">JavaScript</span><span class="chip">React</span><span class="chip">Node.js</span><span class="chip">MongoDB</span></div>
+          <div class="course-cta">
+            <a href="#apply" class="btn btn-gold btn-sm">Download Curriculum</a>
+            <a href="#apply" class="btn btn-ghost btn-sm">Book Demo</a>
+          </div>
+        </div>
+        <div class="phases">
+          <div class="phase-list">
+            <div class="phase"><div class="phase-idx">01</div><div><h4>Web Foundations</h4><p>HTML5, CSS3, Flexbox, Grid and responsive design from scratch.</p><div class="phase-tags"><span>HTML5</span><span>CSS3</span><span>Flexbox</span><span>Git</span></div></div><div class="phase-week">3 Weeks</div></div>
+            <div class="phase"><div class="phase-idx">02</div><div><h4>JavaScript & React</h4><p>ES6+, async/await, DOM, React 18 hooks and Next.js App Router.</p><div class="phase-tags"><span>JavaScript</span><span>React 18</span><span>Next.js</span><span>Redux</span></div></div><div class="phase-week">3 Weeks</div></div>
+            <div class="phase"><div class="phase-idx">03</div><div><h4>Backend & APIs</h4><p>Node.js, Express, REST APIs, JWT authentication and WebSockets.</p><div class="phase-tags"><span>Node.js</span><span>Express</span><span>NestJS</span><span>Redis</span></div></div><div class="phase-week">3 Weeks</div></div>
+            <div class="phase"><div class="phase-idx">04</div><div><h4>Database & DevOps</h4><p>MongoDB, MySQL, Docker, Kubernetes, CI/CD and AWS deployment.</p><div class="phase-tags"><span>MongoDB</span><span>MySQL</span><span>Docker</span><span>AWS</span></div></div><div class="phase-week">3 Weeks</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-panel" data-panel="cloud">
+      <div class="course-body">
+        <div class="course-intro">
+          <div class="course-no">03 — Advanced Tech Skills</div>
+          <h3>Cloud Computing</h3>
+          <p>Every modern software system runs on cloud infrastructure. Master AWS, Linux, Docker and Kubernetes with real cloud projects and full placement support.</p>
+          <div class="course-skills"><span class="chip">AWS</span><span class="chip">Linux</span><span class="chip">Docker</span><span class="chip">Kubernetes</span><span class="chip">Jenkins</span><span class="chip">Terraform</span></div>
+          <div class="course-cta">
+            <a href="#apply" class="btn btn-gold btn-sm">Download Curriculum</a>
+            <a href="#apply" class="btn btn-ghost btn-sm">Book Demo</a>
+          </div>
+        </div>
+        <div class="phases">
+          <div class="phase-list">
+            <div class="phase"><div class="phase-idx">01</div><div><h4>Linux & Networking</h4><p>Kernel, permissions, OSI layers, DNS and packet routing fundamentals.</p><div class="phase-tags"><span>Linux</span><span>Bash</span><span>Networking</span><span>DNS</span></div></div><div class="phase-week">3 Weeks</div></div>
+            <div class="phase"><div class="phase-idx">02</div><div><h4>Docker & Containers</h4><p>Containerize apps with Docker, Compose and portable environments.</p><div class="phase-tags"><span>Docker</span><span>Compose</span><span>Containers</span><span>Registry</span></div></div><div class="phase-week">3 Weeks</div></div>
+            <div class="phase"><div class="phase-idx">03</div><div><h4>Kubernetes & DevOps</h4><p>Manage clusters at scale with CI/CD and zero-downtime releases.</p><div class="phase-tags"><span>Kubernetes</span><span>CI/CD</span><span>Terraform</span><span>Nginx</span></div></div><div class="phase-week">3 Weeks</div></div>
+            <div class="phase"><div class="phase-idx">04</div><div><h4>AWS & Cloud Security</h4><p>Deploy with EC2, S3, Lambda, RDS and DevSecOps practices.</p><div class="phase-tags"><span>AWS</span><span>Lambda</span><span>Prometheus</span><span>Grafana</span></div></div><div class="phase-week">3 Weeks</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-panel" data-panel="gd">
+      <div class="course-body">
+        <div class="course-intro">
+          <div class="course-no">04 — Advanced Tech Skills</div>
+          <h3>Graphic Designing</h3>
+          <p>Become a professional graphic designer with Illustrator, Photoshop and After Effects. Graduate with a live portfolio and dedicated placement assistance.</p>
+          <div class="course-skills"><span class="chip">Illustrator</span><span class="chip">Photoshop</span><span class="chip">After Effects</span><span class="chip">Premiere Pro</span><span class="chip">Figma</span><span class="chip">Canva</span></div>
+          <div class="course-cta">
+            <a href="#apply" class="btn btn-gold btn-sm">Download Curriculum</a>
+            <a href="#apply" class="btn btn-ghost btn-sm">Book Demo</a>
+          </div>
+        </div>
+        <div class="phases">
+          <div class="phase-list">
+            <div class="phase"><div class="phase-idx">01</div><div><h4>Design Fundamentals</h4><p>Color theory, typography, layout and visual hierarchy from day one.</p><div class="phase-tags"><span>Color</span><span>Typography</span><span>Layout</span><span>Hierarchy</span></div></div><div class="phase-week">3 Weeks</div></div>
+            <div class="phase"><div class="phase-idx">02</div><div><h4>Branding & Print</h4><p>Logo design, brand identity, brochures and client-ready collateral.</p><div class="phase-tags"><span>Illustrator</span><span>InDesign</span><span>Logo</span><span>Branding</span></div></div><div class="phase-week">3 Weeks</div></div>
+            <div class="phase"><div class="phase-idx">03</div><div><h4>Digital & Social Media</h4><p>Ad banners, thumbnails and web graphics that stop the scroll.</p><div class="phase-tags"><span>Photoshop</span><span>Social Ads</span><span>Thumbnails</span><span>Web Graphics</span></div></div><div class="phase-week">3 Weeks</div></div>
+            <div class="phase"><div class="phase-idx">04</div><div><h4>Motion & Video</h4><p>Motion graphics, reels and video edits with After Effects & Premiere.</p><div class="phase-tags"><span>After Effects</span><span>Premiere Pro</span><span>Motion</span><span>Reels</span></div></div><div class="phase-week">3 Weeks</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-panel" data-panel="ux">
+      <div class="course-body">
+        <div class="course-intro">
+          <div class="course-no">05 — Advanced Tech Skills</div>
+          <h3>UI/UX Design</h3>
+          <p>Shape how millions experience apps and websites. Master Figma, Framer, HTML and CSS on real product briefs with a portfolio top companies recruit from.</p>
+          <div class="course-skills"><span class="chip">Figma</span><span class="chip">Framer</span><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">Tailwind</span><span class="chip">ProtoPie</span></div>
+          <div class="course-cta">
+            <a href="#apply" class="btn btn-gold btn-sm">Download Curriculum</a>
+            <a href="#apply" class="btn btn-ghost btn-sm">Book Demo</a>
+          </div>
+        </div>
+        <div class="phases">
+          <div class="phase-list">
+            <div class="phase"><div class="phase-idx">01</div><div><h4>Design Fundamentals</h4><p>Color theory, typography, grids and design psychology.</p><div class="phase-tags"><span>Color Theory</span><span>Typography</span><span>Grids</span><span>Hierarchy</span></div></div><div class="phase-week">3 Weeks</div></div>
+            <div class="phase"><div class="phase-idx">02</div><div><h4>Figma Mastery</h4><p>Components, auto-layout, design systems and team workflows.</p><div class="phase-tags"><span>Figma</span><span>Components</span><span>Auto Layout</span><span>Variables</span></div></div><div class="phase-week">3 Weeks</div></div>
+            <div class="phase"><div class="phase-idx">03</div><div><h4>User Research & UX</h4><p>Interviews, personas, journey maps, wireframes and usability testing.</p><div class="phase-tags"><span>User Research</span><span>Wireframes</span><span>Journey Maps</span><span>Usability</span></div></div><div class="phase-week">3 Weeks</div></div>
+            <div class="phase"><div class="phase-idx">04</div><div><h4>Prototyping & Portfolio</h4><p>High-fidelity prototypes, micro-interactions and a portfolio that lands interviews.</p><div class="phase-tags"><span>Prototyping</span><span>ProtoPie</span><span>Handoff</span><span>Portfolio</span></div></div><div class="phase-week">3 Weeks</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-panel" data-panel="dm">
+      <div class="course-body">
+        <div class="course-intro">
+          <div class="course-no">06 — Advanced Tech Skills</div>
+          <h3>Digital Marketing</h3>
+          <p>Every business needs skilled marketers to grow online. Master SEO, Google Ads, social media and content strategy on live brand campaigns.</p>
+          <div class="course-skills"><span class="chip">SEO</span><span class="chip">Google Ads</span><span class="chip">Meta Ads</span><span class="chip">Analytics</span><span class="chip">Email</span><span class="chip">Content</span></div>
+          <div class="course-cta">
+            <a href="#apply" class="btn btn-gold btn-sm">Download Curriculum</a>
+            <a href="#apply" class="btn btn-ghost btn-sm">Book Demo</a>
+          </div>
+        </div>
+        <div class="phases">
+          <div class="phase-list">
+            <div class="phase"><div class="phase-idx">01</div><div><h4>SEO & Content</h4><p>On-page SEO, keyword research and content strategy that ranks page one.</p><div class="phase-tags"><span>SEO</span><span>Keywords</span><span>GSC</span><span>Blogging</span></div></div><div class="phase-week">3 Weeks</div></div>
+            <div class="phase"><div class="phase-idx">02</div><div><h4>Social Media Marketing</h4><p>Build brand presence on Instagram, LinkedIn and YouTube from scratch.</p><div class="phase-tags"><span>Instagram</span><span>LinkedIn</span><span>YouTube</span><span>Reels</span></div></div><div class="phase-week">3 Weeks</div></div>
+            <div class="phase"><div class="phase-idx">03</div><div><h4>Paid Advertising</h4><p>High-ROI campaigns on Google Ads and Meta Ads with A/B testing.</p><div class="phase-tags"><span>Google Ads</span><span>Meta Ads</span><span>PPC</span><span>A/B Testing</span></div></div><div class="phase-week">3 Weeks</div></div>
+            <div class="phase"><div class="phase-idx">04</div><div><h4>Analytics & Strategy</h4><p>GA4, Tag Manager, conversion tracking and full-funnel strategies.</p><div class="phase-tags"><span>GA4</span><span>GTM</span><span>Funnels</span><span>CRO</span></div></div><div class="phase-week">3 Weeks</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== AI RECOMMENDER ===== -->
+<section class="recommender" id="recommender">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Naib AI Course Finder</span>
+      <h2>Not sure which course fits you?</h2>
+      <p>Answer three quick questions — the AI assistant will recommend your ideal program.</p>
+    </div>
+    <div class="quiz-box">
+      <div class="quiz-progress" id="quizProgress"><div class="quiz-dot on" id="qd0"></div><div class="quiz-dot" id="qd1"></div><div class="quiz-dot" id="qd2"></div></div>
+      <div class="quiz" id="quiz">
+        <h3 id="quizQ">What excites you most?</h3>
+        <p class="q-sub" id="quizSub">Pick the answer that sounds most like you.</p>
+        <div class="quiz-options" id="quizOpts"></div>
+        <div class="quiz-actions">
+          <button class="quiz-back" id="quizBack">← Back</button>
+        </div>
+      </div>
+      <div class="quiz-result" id="quizResult">
+        <div class="result-mark">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#C9A961" stroke-width="1.6"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+        </div>
+        <h3 id="resultTitle">Full Stack Development</h3>
+        <p id="resultText">A perfect match. Build real products end to end with one of the most in-demand skills in tech.</p>
+        <div class="hero-cta" style="justify-content:center">
+          <a href="#apply" class="btn btn-gold">Book Free Demo</a>
+          <a href="#courses" class="btn btn-ghost">View Course</a>
+        </div>
+        <button class="quiz-back" id="quizRestart" style="margin-top:18px">Take again</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CAMPUS ===== -->
+<section class="campus" id="campus">
+  <div class="wrap campus-grid">
+    <div class="campus-media">
+      <img src="campus-lab.jpg" alt="Naib Academy premium training lab">
+    </div>
+    <div>
+      <span class="eyebrow">Visit Our Campus</span>
+      <h2 style="font-size:clamp(28px,3.6vw,42px);color:var(--cream);margin:16px 0 18px">Schedule Your Campus Visit</h2>
+      <p style="color:var(--muted);font-size:16px">Experience world-class infrastructure, meet expert faculty and explore state-of-the-art labs. Take the first step toward your dream career with a personalized campus tour.</p>
+      <div class="campus-list">
+        <div class="campus-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="9"/></svg> Flexible Hours</div>
+        <div class="campus-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg> Expert Counselors</div>
+        <div class="campus-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5a2 2 0 0 1 2-2h13v18H6a2 2 0 0 1-2-2z"/><path d="M8 8h8M8 12h5"/></svg> Custom Tour</div>
+        <div class="campus-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg> Free Consultation</div>
+      </div>
+      <a href="#apply" class="btn btn-gold">Schedule Your Visit Today</a>
+      <p class="campus-note">Limited slots available — reserve your personalized tour now.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== NAIB AI ===== -->
+<section class="naib-ai" id="ai">
+  <div class="wrap ai-grid">
+    <div>
+      <span class="eyebrow">Naib AI</span>
+      <h2 style="font-size:clamp(28px,3.6vw,42px);color:var(--cream);margin:16px 0 18px">An AI Assistant Built for Learning</h2>
+      <p style="color:var(--muted);font-size:16px">Naib AI is an advanced AI-powered personal assistant designed for real-time conversation, course guidance and voice-based support. A seamless human-like experience across web platforms.</p>
+      <div class="ai-feats">
+        <div class="ai-feat">
+          <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></div>
+          <div><b>Real-time Chat</b><span>Instant answers about courses, fees, eligibility and career paths.</span></div>
+        </div>
+        <div class="ai-feat">
+          <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></svg></div>
+          <div><b>Voice-based Support</b><span>Speak naturally — Naib AI understands and responds in your language.</span></div>
+        </div>
+        <div class="ai-feat">
+          <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7.4-6.3-4.5-6.3 4.5L8 14l-6-4.6h7.6z"/></svg></div>
+          <div><b>Smart Conversations</b><span>Course matching, study plans and placement readiness — powered by GenAI.</span></div>
+        </div>
+      </div>
+      <a href="#apply" class="btn btn-gold">Try Naib AI — Live Demo</a>
+    </div>
+    <div class="ai-media">
+      <div class="live-tag"><span class="pulse"></span> Live · 2026</div>
+      <img src="ai-brain.jpg" alt="Naib AI — golden neural intelligence">
+    </div>
+  </div>
+</section>
+
+<!-- ===== TRUSTED INSTITUTES ===== -->
+<section class="trusted">
+  <div class="trusted-inner wrap">
+    <span class="eyebrow">Trusted by Students Across Top Institutes</span>
+    <h2 style="font-size:clamp(26px,3.4vw,38px);color:var(--cream);margin:18px 0 8px">Learn Industry-Ready Skills While You Complete Your Degree</h2>
+    <div class="trusted-logos">
+      <span><b>SKIT</b></span>
+      <span><b>ARYA</b> College of Engg & IT</span>
+      <span><b>APEX</b> University</span>
+      <span><b>Balaji</b> CET</span>
+      <span><b>Women's</b> Engineering College</span>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WALL OF FAME ===== -->
+<section class="fame" id="fame">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Placements — Wall of Fame</span>
+      <h2>From Code to Careers</h2>
+      <p>Celebrating our alumni who secured placements at top-tier companies.</p>
+    </div>
+    <div class="fame-grid">
+      <div class="fame-card">
+        <p class="fame-quote">Naib Academy is undoubtedly the best institute for AI training. The course is well-structured, the labs are top-notch, and the support from the instructors is unmatched.</p>
+        <div class="fame-person"><div class="fame-avatar">RK</div><div><b>Reena Kumawat</b><span>AI Engineer</span></div></div>
+      </div>
+      <div class="fame-card">
+        <p class="fame-quote">The Data Science program is outstanding. I mastered Python, SQL and machine learning through intensive projects that bridge the gap between theory and industry.</p>
+        <div class="fame-person"><div class="fame-avatar">DJ</div><div><b>Devendar Jangid</b><span>Data Scientist</span></div></div>
+      </div>
+      <div class="fame-card">
+        <p class="fame-quote">Choosing Naib Academy for Data Science was a game-changer. Their disciplined, industry-focused approach ensures you graduate with a portfolio that impresses recruiters.</p>
+        <div class="fame-person"><div class="fame-avatar">TN</div><div><b>Tarun</b><span>ML Engineer</span></div></div>
+      </div>
+      <div class="fame-card">
+        <p class="fame-quote">The Cloud Computing program transformed my career. The hands-on AWS training provided the foundation to manage complex architectures effectively.</p>
+        <div class="fame-person"><div class="fame-avatar">JK</div><div><b>Jyoti Kumawat</b><span>Cloud Security Specialist</span></div></div>
+      </div>
+      <div class="fame-card">
+        <p class="fame-quote">The curriculum is perfectly structured. From frontend design to backend logic, Naib Academy gave me practical expertise in every layer of the stack.</p>
+        <div class="fame-person"><div class="fame-avatar">DK</div><div><b>Durgesh Kumawat</b><span>MERN Stack Developer</span></div></div>
+      </div>
+      <div class="fame-card">
+        <p class="fame-quote">Exceptional coaching and a very professional environment. We worked on real-world projects that cleared all my coding doubts.</p>
+        <div class="fame-person"><div class="fame-avatar">KS</div><div><b>Kunal Saini</b><span>Full Stack Developer</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HR QUOTES ===== -->
+<section class="hr">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Trusted by 50+ Companies</span>
+      <h2>What Hiring Partners Say</h2>
+      <p>Building careers with top technology companies.</p>
+    </div>
+    <div class="hr-grid">
+      <div class="hr-card">
+        <p>Naib Academy students consistently stand out with strong technical fundamentals and a practical mindset. Hiring from them has been a smooth experience for us.</p>
+        <div class="who"><div class="dot">MB</div><div><b>Mehak Bhati</b><span>HR — Podosphere</span></div></div>
+      </div>
+      <div class="hr-card">
+        <p>We've hired talented candidates who were job-ready from day one. Their training quality, communication skills and confidence make recruitment faster.</p>
+        <div class="who"><div class="dot">PS</div><div><b>Priyanka Sharma</b><span>HR — Jagvimal Consultants</span></div></div>
+      </div>
+      <div class="hr-card">
+        <p>Naib Academy delivers creative and technically skilled candidates who match industry expectations. Their students bring professionalism and strong execution ability.</p>
+        <div class="who"><div class="dot">BM</div><div><b>Bhavika Metwani</b><span>HR — Future Profilez</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== APPLY ===== -->
+<section class="apply" id="apply">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Apply for Upcoming Batches</span>
+      <h2>Three Steps to Your Dream Career</h2>
+      <p>Next batch: 10 May 2026 — seats are limited.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><h3>Request Callback</h3><p>Kickstart your learning journey by requesting a callback today.</p></div>
+      <div class="step"><div class="step-num">2</div><h3>Get on a Call</h3><p>Chat with us to learn more about your options and career path.</p></div>
+      <div class="step"><div class="step-num">3</div><h3>Book your Seat</h3><p>Secure your spot and embark on your learning adventure.</p></div>
+    </div>
+    <div class="apply-cta">
+      <a href="#contact" class="btn btn-gold">Book a Free Demo Class</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CAREER SYSTEM ===== -->
+<section class="career">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Naib Academy Career System</span>
+      <h2>Your Path from Student to Hired Professional</h2>
+      <p>Every student follows the same six steps — every step built around one goal: getting you hired.</p>
+    </div>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-time">01</div><div class="tl-body"><h3>Training</h3><p>Industry-led live classes taught by working professionals.</p></div></div>
+      <div class="tl-item"><div class="tl-time">02</div><div class="tl-body"><h3>Projects</h3><p>Build 10+ real-world applications with modern tools.</p></div></div>
+      <div class="tl-item"><div class="tl-time">03</div><div class="tl-body"><h3>Portfolio</h3><p>Showcase your work to employers with a premium portfolio.</p></div></div>
+      <div class="tl-item"><div class="tl-time">04</div><div class="tl-body"><h3>Interview</h3><p>Practice with real interviewers until you're confident.</p></div></div>
+      <div class="tl-item"><div class="tl-time">05</div><div class="tl-body"><h3>Resume</h3><p>ATS-ready resume crafted for you by our placement team.</p></div></div>
+      <div class="tl-item"><div class="tl-time">06</div><div class="tl-body"><h3>Hired</h3><p>Direct referrals to 50+ hiring partners.</p></div></div>
+    </div>
+    <div class="career-note">Join <b>100+ students</b> who followed this path and landed their first tech job.</div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="faq" id="faq">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Got Questions?</span>
+      <h2>Everything You Want to Know</h2>
+      <p>Real answers for students, freshers and graduates. No jargon. No fluff.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q">What courses does Naib Academy offer?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        <div class="faq-a"><p>We offer six advanced programs: AI & Machine Learning, Full Stack Development, Cloud Computing, Graphic Design, UI/UX Design and Digital Marketing — each with a 12-week, 4-phase industry-aligned curriculum.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Do I need a computer science background to join?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        <div class="faq-a"><p>No. Our programs are built for beginners and career-switchers. Every course starts from fundamentals and builds up to advanced, job-ready skills with hands-on projects.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">How long are the courses?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        <div class="faq-a"><p>Each course runs 12 weeks across four 3-week phases. Classes are flexible — choose timings that fit around your degree or job.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">What is the best course for a high-paying job?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        <div class="faq-a"><p>AI/ML and Full Stack Development consistently produce the highest offers among our alumni. Try our Naib AI Course Finder above for a personal recommendation.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Does Naib Academy provide a certificate?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        <div class="faq-a"><p>Yes. Every student receives a verified completion certificate, a live project portfolio and full placement assistance — resume building, mock interviews and referrals.</p></div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q">Are classes online or offline?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        <div class="faq-a"><p>Both. Attend premium on-campus sessions at our lab or join live online classes from anywhere — with recordings available anytime.</p></div>
+      </div>
+    </div>
+    <div class="faq-extra">Still have a question? Our counsellors are available Monday – Saturday, 9 am – 7 pm. <a href="#contact">Talk to a counsellor →</a></div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#top" class="brand">
+          <span class="brand-mark">NA</span>
+          <span class="brand-name">NAIB ACADEMY<small>Next-Gen Institute</small></span>
+        </a>
+        <p>Premium training and placement institute. We turn raw talent into industry-ready professionals.</p>
+        <div class="admin-line">
+          <div class="admin-avatar">AN</div>
+          <div><b>Arshad Naib</b><span>Founder & Lead Mentor</span></div>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Programs</h4>
+        <a href="#courses">AI & Machine Learning</a>
+        <a href="#courses">Full Stack Development</a>
+        <a href="#courses">Cloud Computing</a>
+        <a href="#courses">Graphic Design</a>
+        <a href="#courses">UI/UX Design</a>
+        <a href="#courses">Digital Marketing</a>
+      </div>
+      <div class="foot-col">
+        <h4>Academy</h4>
+        <a href="#why">Why Us</a>
+        <a href="#campus">Campus</a>
+        <a href="#fame">Placements</a>
+        <a href="#ai">Naib AI</a>
+        <a href="#faq">FAQ</a>
+        <a href="#apply">Apply Now</a>
+      </div>
+      <div class="foot-col">
+        <h4>Contact</h4>
+        <ul class="foot-contact" style="margin:0">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 7l-10 7L2 7"/></svg> arshadnaib20@gmail.com</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg> +880 1727 067 920</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> Mon–Sat · 9am–7pm</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-sign">
+      <div class="foot-copy">© 2026 <b>Naib Academy</b> — Next-Gen Training Institute. All rights reserved.</div>
+      <div class="autograph" title="Arshad Naib — autograph">
+        <svg viewBox="0 0 220 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14 52 C 30 34, 44 24, 52 22 C 62 19, 70 24, 66 30 C 62 37, 52 40, 50 34 C 48 29, 56 24, 64 27 C 72 30, 74 38, 70 42" stroke="#C9A961" stroke-width="2.6" stroke-linecap="round"/>
+          <path d="M76 30 C 80 22, 88 18, 96 20 C 106 23, 104 34, 100 38 C 96 42, 90 42, 92 36 C 94 30, 102 26, 108 28 C 114 30, 116 38, 112 44 C 108 50, 100 52, 100 46" stroke="#C9A961" stroke-width="2.6" stroke-linecap="round"/>
+          <path d="M122 28 C 128 22, 138 18, 146 22 C 156 26, 152 40, 146 42 C 140 44, 134 40, 138 34 C 142 28, 152 24, 158 28" stroke="#C9A961" stroke-width="2.6" stroke-linecap="round"/>
+          <path d="M166 26 C 172 20, 180 18, 186 22 C 192 26, 190 34, 186 38 C 180 43, 172 44, 176 38 C 179 33, 188 28, 194 32 C 200 36, 198 46, 192 50 C 186 54, 178 52, 182 46" stroke="#C9A961" stroke-width="2.6" stroke-linecap="round"/>
+          <path d="M20 56 C 70 50, 140 50, 200 44 C 205 43, 208 45, 205 47" stroke="#C9A961" stroke-width="1.6" stroke-linecap="round" opacity="0.75"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== AI CHAT WIDGET ===== -->
+<div class="chat-launcher" id="chatLauncher" role="button" aria-label="Open Naib AI chat">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#0A0A0B" stroke-width="1.8"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+</div>
+<div class="chat-window" id="chatWindow">
+  <div class="chat-head">
+    <div class="avatar">N</div>
+    <div><b>Naib AI</b><span>Online · replies instantly</span></div>
+    <button class="chat-close" id="chatClose" aria-label="Close chat">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="chat-body" id="chatBody"></div>
+  <div class="chat-quick" id="chatQuick">
+    <button data-q="courses">Courses</button>
+    <button data-q="placement">Placement</button>
+    <button data-q="fees">Fees & Timing</button>
+    <button data-q="contact">Contact</button>
+  </div>
+  <div class="chat-input">
+    <input id="chatInput" type="text" placeholder="Ask about courses, fees, placement...">
+    <button id="chatSend" aria-label="Send">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0A0A0B" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+/* ===== NAV SCROLL ===== */
+const nav = document.getElementById('nav');
+const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
+window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+/* ===== COURSE TABS ===== */
+const tabs = document.querySelectorAll('.course-tab');
+const panels = document.querySelectorAll('.course-panel');
+tabs.forEach(t => t.addEventListener('click', () => {
+  tabs.forEach(x => x.classList.remove('active'));
+  panels.forEach(x => x.classList.remove('active'));
+  t.classList.add('active');
+  document.querySelector('.course-panel[data-panel="' + t.dataset.course + '"]').classList.add('active');
+}));
+
+/* ===== FAQ ===== */
+document.querySelectorAll('.faq-item').forEach(item => {
+  const q = item.querySelector('.faq-q');
+  q.addEventListener('click', () => {
+    const open = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => { i.classList.remove('open'); i.querySelector('.faq-a').style.maxHeight = null; });
+    if (!open) {
+      item.classList.add('open');
+      const a = item.querySelector('.faq-a');
+      a.style.maxHeight = a.scrollHeight + 'px';
+    }
+  });
+});
+
+/* ===== AI COURSE RECOMMENDER ===== */
+const quizData = [
+  {
+    q: "What excites you most?",
+    sub: "Pick the answer that sounds most like you.",
+    options: [
+      {t:"Building intelligent machines", d:"AI, models, data and robotics", c:"ai"},
+      {t:"Creating beautiful interfaces", d:"Design, pixels and user experience", c:"ux"},
+      {t:"Growing brands and audiences", d:"Marketing, content and campaigns", c:"dm"},
+      {t:"Writing code for real products", d:"Websites, apps and systems", c:"fs"}
+    ]
+  },
+  {
+    q: "How do you prefer to work?",
+    sub: "Think about the kind of work that keeps you engaged.",
+    options: [
+      {t:"Hands-on with data", d:"Analyzing, cleaning and modeling", c:"ai"},
+      {t:"Building end to end", d:"Frontend to backend, full ownership", c:"fs"},
+      {t:"Visual and creative", d:"Colors, layouts and motion", c:"gd"},
+      {t:"Strategy and people", d:"Campaigns, funnels and growth", c:"dm"}
+    ]
+  },
+  {
+    q: "What's your goal?",
+    sub: "Where do you want to be two years from now?",
+    options: [
+      {t:"High-paying developer role", d:"Engineering at a top company", c:"fs"},
+      {t:"AI specialist", d:"ML, data science or robotics", c:"ai"},
+      {t:"Cloud architect", d:"Scalable systems and DevOps", c:"cloud"},
+      {t:"Creative director", d:"Design, branding or marketing lead", c:"ux"}
+    ]
+  }
+];
+const courseMap = {
+  ai: {title:"AI & Machine Learning", text:"A perfect match. Learn Python, data science, ML and robotics — and build intelligent systems that top tech companies hire for.", panel:"ai"},
+  fs: {title:"Full Stack Development", text:"A perfect match. Build real products end to end with one of the most in-demand skills in tech.", panel:"fs"},
+  cloud: {title:"Cloud Computing", text:"A perfect match. Master AWS, Docker and Kubernetes — the backbone of every modern system.", panel:"cloud"},
+  gd: {title:"Graphic Design", text:"A perfect match. Turn your creativity into a career with Illustrator, Photoshop and motion design.", panel:"gd"},
+  ux: {title:"UI/UX Design", text:"A perfect match. Shape how millions experience apps and websites, and build a portfolio that gets you hired.", panel:"ux"},
+  dm: {title:"Digital Marketing", text:"A perfect match. Master SEO, ads and content strategy to grow brands in the real world.", panel:"dm"}
+};
+let quizStep = 0, quizAnswer = {};
+const quizQ = document.getElementById('quizQ'), quizSub = document.getElementById('quizSub'), quizOpts = document.getElementById('quizOpts');
+function renderQuiz(){
+  const d = quizData[quizStep];
+  quizQ.textContent = d.q; quizSub.textContent = d.sub;
+  quizOpts.innerHTML = '';
+  d.options.forEach(o => {
+    const b = document.createElement('button');
+    b.className = 'quiz-opt';
+    b.innerHTML = '<b>' + o.t + '</b><small>' + o.d + '</small>';
+    b.onclick = () => {
+      quizAnswer[quizStep] = o.c;
+      quizStep++;
+      if (quizStep < 3){ renderQuiz(); }
+      else { showResult(); }
+    };
+    quizOpts.appendChild(b);
+  });
+  document.getElementById('qd0').classList.toggle('on', quizStep >= 1);
+  document.getElementById('qd1').classList.toggle('on', quizStep >= 2);
+  document.getElementById('qd2').classList.toggle('on', quizStep >= 3);
+}
+function showResult(){
+  const vals = Object.values(quizAnswer);
+  let best = 'fs', score = {fs:0,ai:0,cloud:0,gd:0,ux:0,dm:0};
+  vals.forEach(v => { if(score[v] !== undefined) score[v]++; });
+  let max = 0;
+  Object.keys(score).forEach(k => { if(score[k] > max){ max = score[k]; best = k; } });
+  const r = courseMap[best];
+  document.getElementById('quiz').style.display = 'none';
+  const res = document.getElementById('quizResult');
+  res.classList.add('show');
+  document.getElementById('resultTitle').textContent = r.title;
+  document.getElementById('resultText').textContent = r.text;
+}
+document.getElementById('quizBack').addEventListener('click', () => {
+  if (quizStep > 0){ quizStep--; renderQuiz(); }
+});
+document.getElementById('quizRestart').addEventListener('click', () => {
+  quizStep = 0; quizAnswer = {};
+  document.getElementById('quizResult').classList.remove('show');
+  document.getElementById('quiz').style.display = '';
+  renderQuiz();
+});
+renderQuiz();
+
+/* ===== AI CHAT WIDGET ===== */
+const KB = [
+  {k:["course","program","learn","study"], a:"We offer six premium programs: AI & ML, Full Stack, Cloud Computing, Graphic Design, UI/UX and Digital Marketing. Each runs 12 weeks in 4 phases. Which one interests you?"},
+  {k:["placement","job","hire","career","work"], a:"Our placement system has a 100% assistance record: resume building, mock interviews, portfolio projects and direct referrals to 50+ hiring partners. Students typically get offers within 3 months of finishing."},
+  {k:["fee","price","cost","payment","installment"], a:"Fees vary by program — contact us for the current batch offer and easy installment plans. Free demo classes are available so you can try before you enroll."},
+  {k:["time","duration","week","month","long","schedule","hour"], a:"Each course is 12 weeks across four 3-week phases. Classes are flexible — online and on-campus options with recordings available anytime."},
+  {k:["ai","artificial","machine","ml","data"], a:"Our AI & ML flagship covers Python, data science, machine learning, TensorFlow and robotics with Arduino. It's our most popular program for high-paying careers."},
+  {k:["full","stack","web","frontend","backend","developer"], a:"Full Stack Development covers HTML/CSS, JavaScript, React, Node.js and MongoDB. It's the most hired skill in tech — perfect for building products end to end."},
+  {k:["cloud","aws","docker","kubernetes"], a:"Cloud Computing covers AWS, Linux, Docker and Kubernetes — the backbone of every modern system. Great for DevOps and cloud architect careers."},
+  {k:["design","graphic","ui","ux","photoshop","figma"], a:"We offer Graphic Design (Illustrator, Photoshop, After Effects) and UI/UX Design (Figma, Framer, HTML/CSS). Both build a live portfolio for your first design role."},
+  {k:["marketing","seo","ads","social"], a:"Digital Marketing covers SEO, Google Ads, Meta Ads, social media and analytics — you work on live brand campaigns, not theory."},
+  {k:["contact","phone","email","whatsapp","reach","talk","counsel"], a:"Reach us anytime: email arshadnaib20@gmail.com or WhatsApp +880 1727 067 920. Counsellors are available Mon–Sat, 9am–7pm."},
+  {k:["certificate","certif"], a:"Yes — every graduate receives a verified completion certificate plus a live project portfolio and full placement assistance."},
+  {k:["online","offline","campus","class","location"], a:"We offer both: premium on-campus sessions in our lab and live online classes with recordings available anytime."},
+  {k:["fee","price","cost"], a:"Fees vary by program — contact us for the current batch offer and easy installment plans. Free demo classes are available so you can try before you enroll."},
+  {k:["hello","hi","hey"], a:"Welcome to Naib Academy! Ask me about courses, fees, placement or timings — or try the AI Course Finder above."},
+  {k:["thank"], a:"You're welcome! Anything else about courses, placement or campus — I'm here 24/7."}
+];
+const chatBody = document.getElementById('chatBody'), chatInput = document.getElementById('chatInput');
+function addMsg(text, who){
+  const m = document.createElement('div');
+  m.className = 'msg ' + who;
+  m.textContent = text;
+  chatBody.appendChild(m);
+  chatBody.scrollTop = chatBody.scrollHeight;
+}
+function botReply(q){
+  const t = q.toLowerCase();
+  let reply = "Great question! For the exact details, message Arshad on WhatsApp +880 1727 067 920 — or try the AI Course Finder. Meanwhile: we have six premium 12-week programs with 100% placement assistance.";
+  for (const item of KB){
+    if (item.k.some(kw => t.includes(kw))){ reply = item.a; break; }
+  }
+  setTimeout(() => addMsg(reply, 'bot'), 420);
+}
+function send(){
+  const v = chatInput.value.trim();
+  if (!v) return;
+  addMsg(v, 'user'); chatInput.value = '';
+  botReply(v);
+}
+document.getElementById('chatSend').addEventListener('click', send);
+chatInput.addEventListener('keydown', e => { if (e.key === 'Enter') send(); });
+document.querySelectorAll('.chat-quick button').forEach(b => b.addEventListener('click', () => {
+  addMsg(b.textContent, 'user'); botReply(b.textContent);
+}));
+const launcher = document.getElementById('chatLauncher'), cw = document.getElementById('chatWindow');
+launcher.addEventListener('click', () => cw.classList.add('open'));
+document.getElementById('chatClose').addEventListener('click', () => cw.classList.remove('open'));
+addMsg("Hello! I'm Naib AI — your personal career advisor at Naib Academy. Ask me about courses, fees, placement or timing.", 'bot');
+</script>
+</body>
+</html>
